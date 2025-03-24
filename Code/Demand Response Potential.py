@@ -26,13 +26,13 @@ flag = 0
 for loc_idx, location in enumerate(locations):
     # Load hourly price data
     price_file = os.path.join(grid_data_dir, f"{location}.csv")
-    price_df = pd.read_csv(price_file, header=None, names=["Price_2023", "Price_2024", "Flag_2023", "Flag_2024"])
-    Price[:, 0] = price_df["Price_2024"].values[:8760]
+    price_df = pd.read_csv(price_file, header=None, names=["Price_1", "Price_2"])
+    Price[:, 0] = price_df["Price_2"].values[:8760]
 
     # Load capacity factor (CF) data
     cf_file = os.path.join(grid_data_dir, f"{location}_CF.csv")
-    cf_df = pd.read_csv(cf_file, header=None, names=["CF_2023", "CF_2024", "Flag_2023", "Flag_2024"])
-    CF[:, 0] = cf_df["CF_2024"].values[:8760]
+    cf_df = pd.read_csv(cf_file, header=None, names=["CF_1", "CF_2"])
+    CF[:, 0] = cf_df["CF_2"].values[:8760]
 
     # Loop through all traces
     for trace_idx, trace in enumerate(trace_names):
