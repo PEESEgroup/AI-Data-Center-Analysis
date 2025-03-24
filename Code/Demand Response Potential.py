@@ -71,8 +71,7 @@ for loc_idx, location in enumerate(locations):
             demand = Electricity[t - 1, 0] / 3600 / 1e6
 
             # Power balance
-            model.balance.add(demand <= model.grid_power[t] + model.discharge[t] - model.charge[t])
-            model.balance.add(model.grid_power[t] - demand + model.discharge[t] - model.charge[t] <= 0)
+            model.balance.add(demand == model.grid_power[t] + model.discharge[t] - model.charge[t])
 
             # Battery state-of-charge
             if t == 1:
