@@ -41,14 +41,6 @@ for loc_idx, location in enumerate(locations):
         trace_df = pd.read_csv(trace_path)
         Electricity[:min(len(trace_df), 8760), 0] = trace_df['Electricity:Facility'].values[:8760]
 
-        # Load renewable energy production data
-        adopt_path = os.path.join(data_trace_dir, "monitor.csv")
-        adopt_df = pd.read_csv(adopt_path)
-        Produce[:min(len(adopt_df), 8760), 0] = (
-            adopt_df['WindTurbine:ElectricityProduced'].values[:8760] +
-            adopt_df['Photovoltaic:ElectricityProduced'].values[:8760]
-        )
-
         start_time = time.time()
         T = 8760
         battery_capacity = 15*0.5
@@ -77,10 +69,9 @@ for loc_idx, location in enumerate(locations):
 
         for t in model.T:
             demand = Electricity[t - 1, 0] / 3600 / 1e6
-            renewable = Produce[t - 1, 0] / 3600 / 1e6
 
             # Power balance
-            model.balance.add(demand <= renewable + model.grid_power[t] + model.discharge[t] - model.charge[t])
+            model.balance.add(demand <= model.grid_power[t] + model.discharge[t] - model.charge[t])
             model.balance.add(model.grid_power[t] - demand + model.discharge[t] - model.charge[t] <= 0)
 
             # Battery state-of-charge
