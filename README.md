@@ -25,9 +25,9 @@ The tools mentioned above require relatively complex environment configurations.
 - **Cost_Effective_Renewable_Adoption.py**: the file defines the optimization problem for generating the cost-effective renewable energy adoption strategies.
 
 ## Data
-- **Grid Data Folder**: contains the recent two year grid carbon and price cost data of considered locations.
-- **buildings**: contains the EnergyPlus model used for the DRL and baseline controller
-- **weather**: contains the weather data of considered locations.
+- **Grid Data folder**: contains the recent two year grid carbon and price cost data of considered locations.
+- **buildings folder**: contains the EnergyPlus model used for the DRL and baseline controller
+- **weather folder**: contains the weather data of considered locations.
 
 ## Running the code
 
