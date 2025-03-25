@@ -35,7 +35,7 @@ The tools mentioned above require relatively complex environment configurations.
 ## Running the code
 The DRL_training.py file can be directly runned for training a new DRL model for enhancing AI data center cooling efficiency if all dependencies are installed. The Demand Response Potential.py and Cost_Effective_Renewable_Adoption.py files are used to calculate the defined optimization problems in this study. It can be runned with proper result path definitions within the code. The DRL_evaluate.py is used to evaluate the model performance through a yearly simulation.
 ### An example case for a one-year simulation by using the DRL model
-By applying the uploaded model, a one-year simulation case can be completed. An example code is provided in the DRL_test.py
+By applying the uploaded model and data, one-year simulation cases can be completed. An example is to use the evaluate_model function in the DRL_evaluate.py file like this: evaluate_model(trace_path, environment_name, experiment_name, building_file_path, weather_file_path,config_params={'runperiod':(1,1,2025,31,12,2025),'timesteps_per_hour':1}, training_mean_path, training_var_path, model_path). 
 
 ## Citation
 Please use the following citation when using the data, methods or results of this work:
