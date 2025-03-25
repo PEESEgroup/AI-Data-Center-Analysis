@@ -26,10 +26,10 @@ The tools mentioned above require relatively complex environment configurations.
 - **DRL_test.py**: the file defines an exampe case for running an one-year simulation by applying the DRL-based controller.
 
 ## Data
-- **Grid Data folder**: contains the recent two year grid carbon and price cost data of considered locations.
-- **buildings folder**: contains the EnergyPlus model used for the DRL and baseline controller
-- **weather folder**: contains the weather data of considered locations.
-- **AI Trace Data folder**: contains the hourly AI workload data included in the study.
+- **Grid Data/**: contains the recent two year grid carbon and price cost data of considered locations.
+- **buildings/**: contains the EnergyPlus model used for the DRL and baseline controller
+- **weather/**: contains the weather data of considered locations.
+- **AI Trace Data/**: contains the hourly AI workload data included in the study.
 - **log/**: contains the trained model with its normalization mean values and variance values.
 
 ## Running the code
