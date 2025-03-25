@@ -30,7 +30,7 @@ The tools mentioned above require relatively complex environment configurations.
 - **buildings/**: contains the EnergyPlus model used for the DRL and baseline controller
 - **weather/**: contains the weather data of considered locations.
 - **AI Trace Data/**: contains the hourly AI workload data included in the study.
-- **log/**: contains the trained model with its normalization mean values and variance values.
+- **log.7z**: contains the trained model with its normalization mean values and variance values.
 
 ## Running the code
 The DRL_training.py file can be directly runned for training a new DRL model for enhancing AI data center cooling efficiency if all dependencies are installed. The Demand Response Potential.py and Cost_Effective_Renewable_Adoption.py files are used to calculate the defined optimization problems in this study. It can be runned with proper result path definitions within the code. The DRL_evaluate.py is used to evaluate the model performance through a yearly simulation.
