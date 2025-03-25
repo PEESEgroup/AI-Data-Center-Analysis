@@ -22,23 +22,60 @@ from sinergym.utils.wrappers import *
 from sinergym.utils.common import get_ids
 from typing import Any, Dict, Optional, Sequence, Tuple, Union, List
 
+class CustomCSVLogger(CSVLogger):
 
-def evaluate_model(environment, experiment_name, building_file, weather_file,
+    def __init__(
+            self,
+            monitor_header: str,
+            progress_header: str,
+            log_progress_file: str,
+            log_file: Optional[str] = None,
+            flag: bool = True):
+        super(CustomCSVLogger, self).__init__(monitor_header,progress_header,log_progress_file,log_file,flag)
+        self.last_10_steps_reward = [0]*10
+
+    def _create_row_content(
+            self,
+            obs: List[Any],
+            action: Union[int, np.ndarray, List[Any]],
+            terminated: bool,
+            truncated: bool,
+            info: Optional[Dict[str, Any]]) -> List:
+
+        if info.get('reward') is not None:
+            self.last_10_steps_reward.pop(0)
+            self.last_10_steps_reward.append(info['reward'])
+
+
+        return [
+            info.get('timestep',0)] + list(obs) + list(action) + [
+            info.get('time_elapsed(hours)',0),
+            info.get('reward',None),
+            info.get('energy_term'),
+            info.get('ITE_term'),
+            info.get('comfort_term'),
+            terminated,
+            truncated]
+
+
+def evaluate_model(trace_path, environment, experiment_name, building_file, weather_file,
                    config_params, training_mean, training_var, model):
+    # initialize trace
+    util_rate=np.loadtxt(trace_path, dtype='float')
     # Initialize environment
     eval_env = gym.make(environment, 
                         env_name=experiment_name, 
                         building_file=building_file, 
                         weather_files=weather_file, 
-                        config_params=config_params)
+                        config_params=config_params,
+                        evaluation_flag=1)
     
     eval_env = NormalizeObservation(eval_env, mean=training_mean, var=training_var, automatic_update=False)
-    eval_env = NormalizeAction(eval_env)
     eval_env = LoggerWrapper(eval_env, logger_class=CustomCSVLogger,
                              monitor_header=['timestep'] + 
                              eval_env.get_wrapper_attr('observation_variables') +
                              eval_env.get_wrapper_attr('action_variables') + 
-                             ['time (hours)', 'reward', 'energy_term', 'ITE_term', 'comfort_term', 
+                             ['time (hours)', 'reward', 'energy_term', 'comfort_term', 
                               'terminated', 'truncated'])
     
     print(eval_env.get_wrapper_attr('observation_variables'))
@@ -54,6 +91,7 @@ def evaluate_model(environment, experiment_name, building_file, weather_file,
 
     while not (terminated or truncated):
         action, state = model.predict(obs)
+        action[5]=util_rate[count]
         count += 1
         obs, reward, terminated, truncated, info = eval_env.step(action)
         rewards.append(reward)
@@ -66,5 +104,5 @@ def evaluate_model(environment, experiment_name, building_file, weather_file,
             print('Mean Reward: ', np.mean(rewards))
             print('Info: ', info)
 
-    print('Episode', locations, 'Mean reward:', np.mean(rewards))
+    print('Mean reward:', np.mean(rewards))
     eval_env.close()
