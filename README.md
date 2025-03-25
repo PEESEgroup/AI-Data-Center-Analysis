@@ -23,14 +23,19 @@ The tools mentioned above require relatively complex environment configurations.
 - **DRL_evaluate.py**: the file defines the evaluation process for trained DRL model.
 - **Demand Response Potential.py**: the file defines the optimization problem for evaluating the maximum BESS-based demand response potential.
 - **Cost_Effective_Renewable_Adoption.py**: the file defines the optimization problem for generating the cost-effective renewable energy adoption strategies.
+- **DRL_test.py**: the file defines an exampe case for running an one-year simulation by applying the DRL-based controller.
 
 ## Data
 - **Grid Data folder**: contains the recent two year grid carbon and price cost data of considered locations.
 - **buildings folder**: contains the EnergyPlus model used for the DRL and baseline controller
 - **weather folder**: contains the weather data of considered locations.
+- **AI Trace Data folder**: contains the hourly AI workload data included in the study.
+- **log/**: contains the trained model with its normalization mean values and variance values.
 
 ## Running the code
-
+The DRL_training.py file can be directly runned for training a new DRL model for enhancing AI data center cooling efficiency if all dependencies are installed. The Demand Response Potential.py and Cost_Effective_Renewable_Adoption.py files are used to calculate the defined optimization problems in this study. It can be runned with proper result path definitions within the code. The DRL_evaluate.py is used to evaluate the model performance through a yearly simulation.
+### An example case for a one-year simulation by using the DRL model
+By applying the uploaded model, a one-year simulation case can be completed. An example code is provided in the DRL_test.py
 
 ## Citation
 Please use the following citation when using the data, methods or results of this work:
