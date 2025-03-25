@@ -27,7 +27,7 @@ print(sinergym_environment_ids)
 
 # Environment Parameter definition
 environment = "Eplus-DC-Cooling"
-building_file_1=['DRL_DC.epJSON']
+building_file_1=['DRL_DC_training.epJSON']
 whole_weather_file=['AUS_NSW_Sydney.Intl.AP.947670_TMYx.2009-2023.epw', 'DEU_HE_Frankfurt.AP.106370_TMYx.2009-2023.epw',
                     'SGP_SG_Singapore-Changi.Intl.AP.486980_TMYx.2009-2023.epw', 'SWE_NB_Lulea.AP.021860_TMYx.2009-2023.epw',
                     'USA_CA_San.Francisco.Intl.AP.724940_TMYx.2009-2023.epw', 'USA_IA_Des.Moines.Intl.AP.725460_TMYx.2009-2023.epw',
