@@ -40,7 +40,7 @@ By applying the uploaded model and data, one-year simulation cases can be comple
 ## Citation
 Please use the following citation when using the data, methods or results of this work:
 
-Xiao, T., You, F., Leveraging AI to Explore Cost-Effective Decarbonization Solutions for AI Data Centers. Submitted to Nature Climate Change.
+Xiao, T., You, F., Leveraging Power of AI within Renewable Energy Strategies for Sustainable AI Data Center. Submitted to Energy & Environmental Science.
 
 
 
